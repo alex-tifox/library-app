@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Book List</title>
 </head>
 <body>
-
+    <div>
+        <table border="1">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+            </tr>
+            <tr th:each ="book : ${books}">
+                <td th:utext="${book.title}">...</td>
+                <td th:utext="${book.author}">...</td>
+                <td th:utext="${book.isbn}">...</td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

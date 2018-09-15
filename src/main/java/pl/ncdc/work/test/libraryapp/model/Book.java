@@ -1,10 +1,15 @@
 package pl.ncdc.work.test.libraryapp.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String title;
@@ -12,6 +17,14 @@ public class Book {
     private String author;
 
     private String isbn;
+
+    public Book(){}
+
+    public Book(String title, String author, String isbn){
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
 
     public long getId() {
         return id;
