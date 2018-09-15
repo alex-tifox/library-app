@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Add Book</title>
 </head>
 <body>
-
+    <form th:action="@{/addPage}"
+          th:object="${bookForm}" method="POST">
+        Title:
+        <input type="text" th:field="*{title}" />
+        <br/>
+        Author
+        <input type="text" th:field="*{author}" />
+        <br/>
+        ISBN:
+        <input type="text" th:field="*{isbn}" />
+        <br/>
+        <input type="submit" value="Add Book" />
+    </form>
 </body>
 </html>
