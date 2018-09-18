@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import pl.ncdc.work.test.libraryapp.filter.AuthorNamePattern;
 import pl.ncdc.work.test.libraryapp.model.Book;
 import pl.ncdc.work.test.libraryapp.model.BookForm;
 import pl.ncdc.work.test.libraryapp.repository.BookRepo;
@@ -48,10 +49,14 @@ public class BookController {
     public String saveBook(Model model,
                            @ModelAttribute("bookForm") BookForm bookForm) {
 
-        Book book = new Book(bookForm.getTitle(), bookForm.getAuthor(), bookForm.getIsbn());
-        bookService.saveBook(book);
+        if(AuthorNamePattern.isAuthorNamePattern(bookForm.getAuthor())) {
+            Book book = new Book(bookForm.getTitle(), bookForm.getAuthor(), bookForm.getIsbn());
+            bookService.saveBook(book);
+            return "redirect:/listPage";
+        } else {
+            return "uncorrectAuthor";
+        }
 
-        return "redirect:/listPage";
     }
 
 
