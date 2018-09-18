@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.ncdc.work.test.libraryapp.model.Book;
 import pl.ncdc.work.test.libraryapp.model.BookForm;
 import pl.ncdc.work.test.libraryapp.repository.BookRepo;
+import pl.ncdc.work.test.libraryapp.service.BookService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,17 +19,15 @@ import java.util.List;
 @Controller
 public class BookController {
 
-    private BookRepo bookRepo;
+    private BookService bookService;
     @Autowired
-    public BookController(BookRepo bookRepo) {
-        this.bookRepo = bookRepo;
-    }
+    public BookController(BookService bookService) {this.bookService = bookService; }
 
     private List<Book> books = new ArrayList<>();
 
     @GetMapping("/listPage")
     public String getAllBooks(Model model){
-        books = (List)this.bookRepo.findAll();
+        books = (List)bookService.getBooks();
         if (books.isEmpty()){
             return "noRecordsFound";
         } else {
@@ -50,7 +49,7 @@ public class BookController {
                            @ModelAttribute("bookForm") BookForm bookForm) {
 
         Book book = new Book(bookForm.getTitle(), bookForm.getAuthor(), bookForm.getIsbn());
-        this.bookRepo.save(book);
+        bookService.saveBook(book);
 
         return "redirect:/listPage";
     }
