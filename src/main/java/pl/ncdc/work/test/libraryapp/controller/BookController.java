@@ -29,14 +29,15 @@ public class BookController {
 
     @GetMapping("/listPage")
     public String getAllBooks(Model model){
+
         logger.info("Getting books to listPage... going to service...");
-        books = (List)bookService.getBooks();
+        books = (List) bookService.getBooks();
         if (books.isEmpty()){
-            logger.info("No records in storage was found");
+            logger.info("Redirecting to \"noRecords page\"");
             return "noRecordsFound";
         } else {
             model.addAttribute("books", books);
-            logger.info("Books were found. Redireting...");
+            logger.info("Books were founded. Redireting to listPage..");
             return "listPage";
         }
 

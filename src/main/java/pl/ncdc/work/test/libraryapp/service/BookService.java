@@ -36,7 +36,7 @@ public class BookService {
         logger.info("Getting all books from repository...");
 
         if (this.bookRepo.findAll() != null){
-            logger.info("Books founded..");
+            logger.info("Some books in repo were founded");
             return this.bookRepo.findAll();
         } else {
             logger.info("No books in repository.. empty list is on it's way");
