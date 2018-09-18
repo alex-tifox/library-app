@@ -52,8 +52,7 @@ public class BookController {
     }
 
     @PostMapping("/addPage")
-    public String saveBook(Model model,
-                           @ModelAttribute("bookForm") BookForm bookForm) {
+    public String saveBook(@ModelAttribute("bookForm") BookForm bookForm) {
         Book book = new Book(
                 bookForm.getTitle(),
                 bookForm.getAuthor(),
