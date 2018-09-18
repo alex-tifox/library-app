@@ -18,9 +18,10 @@ public abstract class AuthorNamePattern {
 
         for(int i = 0; i < authorData.length; i++) {
             if (authorData[i].charAt(0) == 'A') {
-                if (i == authorData.length-1)
+                if (i == authorData.length-1) {
                     logger.info("Author name successfully passed control...");
                     return true;
+                }
             } else {
                 logger.info("Author name is not correct");
                 return false;

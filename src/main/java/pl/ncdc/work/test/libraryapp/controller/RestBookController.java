@@ -26,10 +26,14 @@ public class RestBookController {
         return bookService.getBooks();
     }
 
-    @PostMapping("/saveBook")
-    public void saveBook(@RequestBody Book book)
-    {
-        logger.info("Saving book: "+ book.toString()+ "\n Going to service...");
-        bookService.saveBook(book);
+    @PostMapping("/addBook")
+    public void addBook(@RequestBody Book book) {
+        logger.info("Adding book: " + book.toString() + "\n Going to service...");
+
+        if (bookService.saveBook(book)) {
+            logger.info("Added successfully");
+        } else {
+            logger.info("saving was cancelled by service");
+        }
     }
 }
